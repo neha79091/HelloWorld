@@ -1,0 +1,12 @@
+<p>calculator works!</p>
+
+<!-- <input [value]="operand1"(keyup.enter)="operand1=$event.target.value;Calculate()"/> -->
+<input [(ngModel)]="operand1"(keyup.enter)="onKeyUp1()"/>
+<input [(ngModel)]="operand2"(keyup.enter)="onKeyUp2()"/><br/><br/>
+<button (click)="add()" class="btn btn-primary">Add</button><br/><br/>
+<button (click)="minus()" class="btn btn-primary">Subtract</button><br/><br/>
+<button (click)="product()" class="btn btn-primary">Product</button><br/><br/>
+<button (click)="divide()" class="btn btn-primary">Division</button><br/><br/>
+<p>Result is {{result}}</p>
+
+

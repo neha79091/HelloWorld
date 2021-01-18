@@ -1,0 +1,47 @@
+<!-- <div *ngIf="courses.length>0; then coursesList else noCourses"></div>
+<ng-template #coursesList>List of courses</ng-template>
+<ng-template #noCourses>No courses Yet</ng-template>
+<br/><br/><br/> -->
+
+<!-- <ul class="nav nav-pills">
+    <li class="nav-item"><a (click)="viewMode='map'" class="nav-link" [class.active]="viewMode=='map'"   > Map View </a></li>    
+    <li class="nav-item"><a (click)="viewMode='list'"  class="nav-link" [class.active]="viewMode=='list'" > List View </a></li>
+</ul>
+
+<div [ngSwitch]="viewMode">
+  it adds or remove the DOM element hence it is a structural directive so prefixed by * -->
+     <!-- <div *ngSwitchCase ="'map'"> Map View Content</div>
+    <div *ngSwitchCase ="'list'">List View Content</div>
+    <div *ngSwitchDefault>Otherwise</div>
+</div> -->
+
+  <!-- <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="pill" href="">Driver Details</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="pill" href="">Register Driver</a>
+    </li>
+  </ul> -->
+<!-- <button class="btn btn-primary" (click)="loadCourse()" >Load Courses</button>
+  <ul>
+    <li *ngFor="let course1 of courses1;trackBy:trackCourse">
+      {{course1.name}}
+    </li>
+  </ul> -->
+
+  <!-- <input type="text" appInputFornat> -->
+    <!-- <nav mat-tab-nav-bar [backgroundColor]="background">
+      <a mat-tab-link *ngFor="let link of links"
+        (click)="activeLink = link"
+        [active]="activeLink == link"> {{link}} </a>
+      <a mat-tab-link disabled>Disabled Link</a>
+    </nav> -->
+<!-- <zippy title="Shipping Details">
+  Shipping Details Content
+</zippy>
+<zippy title="Billing Details">
+  Billing Details Content
+</zippy> -->
+<app-contact-form></app-contact-form>

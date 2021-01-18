@@ -1,0 +1,15 @@
+
+
+<span class=
+"bi "
+[class.bi-star-fill]="isFavourite"
+[class.bi-star]="!isFavourite"
+(click)="onclick()"
+
+></span>
+
+<button class="btn-primary">SAVE</button><br>
+<i class ="navbar-toggler-icon fa fa-bars"></i>
+<input type="text" [(ngModel)]="title">
+<br>
+{{title |titleCase}}
