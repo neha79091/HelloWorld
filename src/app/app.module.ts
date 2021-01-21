@@ -1,8 +1,9 @@
+import { SignupFormComponent } from './signup-form/signup-form.component';
 import { SummaryPipe } from './summary.pipe';
 import { AuthorService } from './author.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { CoursesComponent } from './Courses.component';
 import { AuthorComponent } from './author/author.component';
@@ -15,6 +16,7 @@ import { CommonModule } from '@angular/common';
 import { InputFornatDirective } from './input-fornat.directive';
 import { ZippyComponent } from './zippy/zippy.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
+import { UdemyComponent } from './udemy/udemy.component';
 
 @NgModule({
   declarations: [
@@ -29,12 +31,15 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
     LikeComponent,
     InputFornatDirective,
     ZippyComponent,
-    ContactFormComponent
+    ContactFormComponent,
+    UdemyComponent,
+    SignupFormComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   providers: [AuthorService
   ],
