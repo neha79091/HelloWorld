@@ -17,6 +17,7 @@ import { InputFornatDirective } from './input-fornat.directive';
 import { ZippyComponent } from './zippy/zippy.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { UdemyComponent } from './udemy/udemy.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { UdemyComponent } from './udemy/udemy.component';
     ZippyComponent,
     ContactFormComponent,
     UdemyComponent,
-    SignupFormComponent
+    SignupFormComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
