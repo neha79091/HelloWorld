@@ -6,6 +6,15 @@ class="form-control">
     <li 
     *ngFor="let post of postsArr"
     class="list-group-item">
+    <button 
+    back
+    (click)="updatePost(post)"
+    class="btn btn-secondary">UPDATE</button>
+    <p>space bw buttons</p>
+    <button 
+    back
+    (click)="deletePost(post)"
+    class="btn btn-secondary">DELETE</button>
 {{post.title}}
     </li>
 </ul>

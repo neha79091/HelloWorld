@@ -18,7 +18,7 @@ private url:string='http://jsonplaceholder.typicode.com/posts';
             this.postsArr=response; 
         });
     }
-
+//here we are creating
   createPost(input:HTMLInputElement)
   {   let post={title:input.value};
       input.value='';
@@ -28,6 +28,21 @@ private url:string='http://jsonplaceholder.typicode.com/posts';
         this.postsArr.splice(0,0,post);
         console.log(response);
       });
+  }
+  updatePost(post)
+  {
+    this.http.patch(this.url +'/'+post.id,JSON.stringify({isRead:true}))
+    .subscribe((response:any)=>{
+      console.log(response);
+    })
+  }
+  deletePost(post)
+  {
+    this.http.delete(this.url +'/'+post.id)
+    .subscribe((response:any)=>{
+      let index=this.postsArr.indexOf(post);
+      this.postsArr.splice(index,1);
+    })
   }
 
 }
