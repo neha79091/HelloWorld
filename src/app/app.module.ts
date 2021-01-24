@@ -13,11 +13,13 @@ import { FavouriteComponent } from './favourite/favourite.component';
 import { TitleCasePipe } from './title-case.pipe';
 import { LikeComponent } from './like/like.component';
 import { CommonModule } from '@angular/common';
+import {HttpClientModule} from '@angular/common/http'
 import { InputFornatDirective } from './input-fornat.directive';
 import { ZippyComponent } from './zippy/zippy.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { UdemyComponent } from './udemy/udemy.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { PostsComponent } from './posts/posts.component';
 
 @NgModule({
   declarations: [
@@ -35,13 +37,15 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     ContactFormComponent,
     UdemyComponent,
     SignupFormComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    PostsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [AuthorService
   ],
