@@ -1,4 +1,5 @@
-import { HttpClient } from '@angular/common/http';
+import { PostsService } from './../services/posts.service';
+
 import { Component, OnInit } from '@angular/core';
 
 
@@ -7,41 +8,63 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css']
 })
-export class PostsComponent  {
+export class PostsComponent implements OnInit {
 postsArr:any[];
-private url:string='http://jsonplaceholder.typicode.com/posts';
-  constructor(private http:HttpClient)
+
+  constructor(private service:PostsService)
    {
-      http.get(this.url)
-      .subscribe((response:any[])=>
-        {
-            this.postsArr=response; 
-        });
+     
     }
+  ngOnInit(): void {
+      this.service.getPost()
+    .subscribe((response:any[])=>
+      {
+          this.postsArr=response; 
+      },error=>
+      {
+        alert('An unexpected error occured')
+      });
+  }
 //here we are creating
   createPost(input:HTMLInputElement)
   {   let post={title:input.value};
       input.value='';
-      this.http.post(this.url,JSON.stringify(post))
+      this.service.createPost(input)
       .subscribe((response:any)=>{
         post['id']=response.id;
         this.postsArr.splice(0,0,post);
         console.log(response);
+      },error=>
+      {
+        alert('An unexpected error occured')
       });
   }
   updatePost(post)
   {
-    this.http.patch(this.url +'/'+post.id,JSON.stringify({isRead:true}))
+    this.service.updatePost(post)
     .subscribe((response:any)=>{
       console.log(response);
+    },error=>
+    {
+      alert('An unexpected error occured')
     })
   }
   deletePost(post)
   {
-    this.http.delete(this.url +'/'+post.id)
+    this.service.deletePost(post)
     .subscribe((response:any)=>{
       let index=this.postsArr.indexOf(post);
       this.postsArr.splice(index,1);
+    },
+    (error:Response)=>
+    {
+      if(error.status===404)
+        alert('This Post has already been deleted')
+      else
+      {
+        alert('An unexpected error occured')
+      }
+      
     })
   }
 
