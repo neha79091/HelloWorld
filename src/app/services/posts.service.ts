@@ -1,3 +1,4 @@
+import { BadInput } from './../common/bad-input';
 import { NotFoundError } from './../common/not-found-error';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -34,6 +35,8 @@ export class PostsService {
     .pipe(catchError(this.handleError))
   }
   handleError(Error: Response){
+    if(Error.status===400)
+      return throwError(new BadInput(Error.json()))
     if(Error.status===404)
       return throwError(new NotFoundError());
     return throwError(new AppError(Error));

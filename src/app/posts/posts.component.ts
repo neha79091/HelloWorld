@@ -3,6 +3,7 @@ import { PostsService } from './../services/posts.service';
 
 import { Component, OnInit } from '@angular/core';
 import { AppError } from '../common/app-error';
+import { error } from 'protractor';
 
 
 @Component({
@@ -22,9 +23,6 @@ postsArr:any[];
     .subscribe((response:any[])=>
       {
           this.postsArr=response; 
-      },error=>
-      {
-        alert('An unexpected error occured')
       });
   }
 //here we are creating
@@ -37,12 +35,7 @@ postsArr:any[];
         this.postsArr.splice(0,0,post);
         console.log(response);
       },
-      (error:Response)=>
-      {
-        if(error.status===400)
-          // this.form.setErrors(error.json())
-        alert('An unexpected error occured')
-      });
+      );
   }
   updatePost(post)
   {
@@ -58,9 +51,7 @@ postsArr:any[];
       }
       
       else
-      {
-        alert('An unexpected error occured')
-      }
+      throw error
     })
   }
   
@@ -79,7 +70,7 @@ postsArr:any[];
         alert('This Post has already been deleted')
       else
       {
-        alert('An unexpected error occured')
+        throw error
       }
       
     })
