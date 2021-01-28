@@ -1,4 +1,4 @@
-import { EmailService } from './../email.service';
+import { EmailService } from '../email.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

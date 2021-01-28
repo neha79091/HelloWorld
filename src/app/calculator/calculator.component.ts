@@ -1,4 +1,4 @@
-import { CalculatorService } from './../calculator.service';
+import { CalculatorService } from '../calculator.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

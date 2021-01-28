@@ -1,5 +1,10 @@
+import { NotFoundError } from './../common/not-found-error';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
+import { map, catchError } from 'rxjs/operators';
+import { of, Observable, throwError } from 'rxjs';
+import { AppError } from '../common/app-error';
 
 @Injectable({
   providedIn: 'root'
@@ -20,9 +25,17 @@ export class PostsService {
   updatePost(post)
   {
    return this.http.patch(this.url +'/'+post.id,JSON.stringify({isRead:true}))
+   .pipe(catchError(this.handleError))
   }
-  deletePost(post)
+  deletePost(postId)
   {
-    return this.http.delete(this.url +'/'+post.id)
+    console.log(postId)
+    return this.http.delete(this.url +'/'+postId)
+    .pipe(catchError(this.handleError))
+  }
+  handleError(Error: Response){
+    if(Error.status===404)
+      return throwError(new NotFoundError());
+    return throwError(new AppError(Error));
   }
 }

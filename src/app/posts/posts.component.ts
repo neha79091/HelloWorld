@@ -1,6 +1,8 @@
+import { NotFoundError } from './../common/not-found-error';
 import { PostsService } from './../services/posts.service';
 
 import { Component, OnInit } from '@angular/core';
+import { AppError } from '../common/app-error';
 
 
 @Component({
@@ -34,8 +36,11 @@ postsArr:any[];
         post['id']=response.id;
         this.postsArr.splice(0,0,post);
         console.log(response);
-      },error=>
+      },
+      (error:Response)=>
       {
+        if(error.status===400)
+          // this.form.setErrors(error.json())
         alert('An unexpected error occured')
       });
   }
@@ -44,21 +49,33 @@ postsArr:any[];
     this.service.updatePost(post)
     .subscribe((response:any)=>{
       console.log(response);
-    },error=>
+    },(error:AppError)=>
     {
-      alert('An unexpected error occured')
+      console.log(error)
+      if(error instanceof NotFoundError)
+      {
+        alert('Post is not available')
+      }
+      
+      else
+      {
+        alert('An unexpected error occured')
+      }
     })
   }
+  
+
   deletePost(post)
-  {
-    this.service.deletePost(post)
+  { 
+    this.service.deletePost(234827928492)
     .subscribe((response:any)=>{
       let index=this.postsArr.indexOf(post);
       this.postsArr.splice(index,1);
     },
-    (error:Response)=>
+    (error:AppError)=>
     {
-      if(error.status===404)
+      console.log(error)
+      if(error instanceof NotFoundError)
         alert('This Post has already been deleted')
       else
       {
