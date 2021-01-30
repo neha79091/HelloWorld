@@ -19,23 +19,24 @@ export class DataService {
   getAll()
   {
     return this.http.get(this.url)
-    .pipe(catchError(this.handleError))
+    .pipe(map((response:any)=>response)
+    ,(catchError(this.handleError)))
   }
   create(resource){
     
-    return this.http.post(this.url,JSON.stringify(resource))
-    .pipe(catchError(this.handleError))
+    return this.http.post(this.url,resource.toString())
+    .pipe(map((response:any)=>response),catchError(this.handleError))
   }
   update(resource)
   {
    return this.http.patch(this.url +'/'+resource.id,JSON.stringify({isRead:true}))
-   .pipe(catchError(this.handleError))
+   .pipe(map((response:any)=>response),catchError(this.handleError))
   }
   delete(Id)
   {
     console.log(Id)
     return this.http.delete(this.url +'/'+Id)
-    .pipe(catchError(this.handleError))
+    .pipe(map((response:any)=>response),catchError(this.handleError))
   }
   handleError(Error: Response){
     if(Error.status===400)
