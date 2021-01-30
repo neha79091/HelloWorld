@@ -19,7 +19,7 @@ postsArr:any[];
      
     }
   ngOnInit(): void {
-      this.service.getPost()
+      this.service.getAll()
     .subscribe((response:any[])=>
       {
           this.postsArr=response; 
@@ -28,8 +28,8 @@ postsArr:any[];
 //here we are creating
   createPost(input:HTMLInputElement)
   {   let post={title:input.value};
-      input.value='';
-      this.service.createPost(input)
+      //input.value='';
+      this.service.create(input)
       .subscribe((response:any)=>{
         post['id']=response.id;
         this.postsArr.splice(0,0,post);
@@ -39,7 +39,7 @@ postsArr:any[];
   }
   updatePost(post)
   {
-    this.service.updatePost(post)
+    this.service.update(post)
     .subscribe((response:any)=>{
       console.log(response);
     },(error:AppError)=>
@@ -58,7 +58,7 @@ postsArr:any[];
 
   deletePost(post)
   { 
-    this.service.deletePost(234827928492)
+    this.service.delete(234827928492)
     .subscribe((response:any)=>{
       let index=this.postsArr.indexOf(post);
       this.postsArr.splice(index,1);
