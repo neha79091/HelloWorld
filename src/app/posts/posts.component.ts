@@ -1,8 +1,11 @@
+import { throwError } from 'rxjs';
+import { BadInput } from './../common/bad-input';
+import { AppError } from './../common/app-error';
 import { NotFoundError } from './../common/not-found-error';
 import { PostsService } from './../services/posts.service';
 
 import { Component, OnInit } from '@angular/core';
-import { AppError } from '../common/app-error';
+
 import { error } from 'protractor';
 
 
@@ -27,14 +30,27 @@ postsArr:any[];
   }
 //here we are creating
   createPost(input:HTMLInputElement)
-  {   let post={title:input.value};
+  {   let post={title:input.value};// creating the post object
+      this.postsArr.splice(0,0,post);//optimistic update implementation
+
       input.value='';
+
       this.service.create(input)
       .subscribe((posts)=>{
         post['id']=posts.id;
-        this.postsArr.splice(0,0,post);
+       
         console.log(posts);
-      },
+      }
+      ,(error:AppError)=>
+      {
+        console.log("i am here")
+        this.postsArr.splice(0,1);
+        if(error instanceof BadInput)
+        {
+          
+        }
+        else throw error;
+      }
       );
   }
   updatePost(post)
@@ -58,13 +74,16 @@ postsArr:any[];
 
   deletePost(post)
   { 
+    let index=this.postsArr.indexOf(post);
+      this.postsArr.splice(index,1);
+
     this.service.delete(post.id)
     .subscribe((posts)=>{
-      let index=this.postsArr.indexOf(post);
-      this.postsArr.splice(index,1);
+      
     },
     (error:AppError)=>
     {
+      this.postsArr.splice(index,0,post)
       console.log(error)
       if(error instanceof NotFoundError)
         alert('This Post has already been deleted')
